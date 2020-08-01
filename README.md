@@ -83,7 +83,7 @@ Options:
   Default: `30e3` milliseconds (30s).
 
 <a name='request'></a>
-#### `client.request(opts, callback(err, data))`
+#### `client.request(opts, callback(err, data: { statusCode, headers, body, opaque }))`
 
 Performs a HTTP request.
 
@@ -218,7 +218,7 @@ ee.emit('abort')
 Destroying the request or response body will have the same effect.
 
 <a name='stream'></a>
-#### `client.stream(opts, factory(data), callback(err))`
+#### `client.stream(opts, factory(data: { statusCode, headers, opaque }), callback(err))`
 
 A faster version of [`request`][request].
 
@@ -286,7 +286,7 @@ function (req, res) {
 ```
 
 <a name='pipeline'></a>
-#### `client.pipeline(opts, handler(data))`
+#### `client.pipeline(opts, handler(data: { statusCode, headers, body, opaque }))`
 
 For easy use with [`stream.pipeline`](https://nodejs.org/api/stream.html#stream_stream_pipeline_source_transforms_destination_callback).
 
