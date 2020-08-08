@@ -146,11 +146,13 @@ test('pipeline ignore request body', (t) => {
           callback()
         },
         final (callback) {
+          console.error('writable.final')
           t.strictEqual(res, 'asd')
           callback()
         }
       }),
       (err) => {
+        console.error('pipeline.cb')
         t.error(err)
       }
     )
