@@ -3,5 +3,5 @@
 const { createServer } = require('http')
 
 createServer((req, res) => {
-  res.end('hello world')
+  req.pipe(res)
 }).listen(3009)

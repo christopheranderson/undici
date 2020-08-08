@@ -18,7 +18,7 @@ const { kGetNext } = require('../lib/symbols')
 const httpOptions = {
   protocol: 'http:',
   hostname: 'localhost',
-  method: 'GET',
+  method: 'PUT',
   path: '/',
   port: 3009,
   agent: new http.Agent({
@@ -29,7 +29,8 @@ const httpOptions = {
 
 const undiciOptions = {
   path: '/',
-  method: 'GET'
+  method: 'PUT',
+  body: 'hello world'
 }
 
 const pool = undici(`http://${httpOptions.hostname}:${httpOptions.port}`, {
@@ -46,7 +47,7 @@ suite
   .add('http - keepalive', {
     defer: true,
     fn: deferred => {
-      http.get(httpOptions, response => {
+      http.request(httpOptions, response => {
         const stream = new Writable({
           write (chunk, encoding, callback) {
             callback()
@@ -58,6 +59,7 @@ suite
 
         response.pipe(stream)
       })
+        .end('hello world')
     }
   })
   .add('undici - pipeline', {
