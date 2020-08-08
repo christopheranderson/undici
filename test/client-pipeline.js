@@ -133,6 +133,10 @@ test('pipeline ignore request body', (t) => {
           this.push(buf2)
           done = () => this.push(null)
         }
+      }).on('end', () => {
+        console.error('readable."end')
+      }).on('close', () => {
+        console.error('readable."close')
       }),
       client.pipeline({
         path: '/',
